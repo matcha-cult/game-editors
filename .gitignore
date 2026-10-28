@@ -1,0 +1,15 @@
+# 依赖与构建产物
+node_modules/
+dist/
+*.tsbuildinfo
+.tsbuildinfo
+
+# 编辑器 / 系统
+.DS_Store
+.vscode/
+.idea/
+
+# 日志
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*

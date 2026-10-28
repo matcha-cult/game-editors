@@ -1,0 +1,418 @@
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #1c1c1c;
+  color: #e6e6e6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding: 8px 24px;
+  border-bottom: 1px solid #3a3a3a;
+  background: #252525;
+}
+
+.app-header h1 {
+  font-size: 17px;
+  min-width: 0;
+  flex: 0 1 auto;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #f0f0f0;
+  font-weight: 600;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #0e1a22;
+  background: linear-gradient(135deg, #6fd3ff, #2f8fd0);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.app-main {
+  flex: 1;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 20px 24px 40px;
+}
+
+.app-footer {
+  border-top: 1px solid #2f2f2f;
+  padding: 14px 24px;
+  font-size: 12px;
+  color: #8a8a8a;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.dropzone {
+  margin: 48px auto;
+  max-width: 620px;
+  padding: 64px 24px;
+  border: 2px dashed #4c4c4c;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: #232323;
+}
+
+.dropzone:hover,
+.dropzone.dragging {
+  border-color: #49c5ff;
+  background: #263037;
+}
+
+.dropzone .dropzone-icon {
+  font-size: 44px;
+  color: #49c5ff;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.dropzone .dropzone-title {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #f0f0f0;
+}
+
+.dropzone .dropzone-hint {
+  color: #9a9a9a;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.item-icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  border-radius: 4px;
+  background-color: #1e1e1e;
+  flex: none;
+}
+
+.item-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-index {
+  color: #7d7d7d;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.row-item-name {
+  min-width: 190px;
+}
+
+.dye-preview {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  border: 1px solid #555;
+  display: inline-block;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 0;
+  min-height: 40px;
+}
+
+.stat-row > .stat-label {
+  color: #d5d5d5;
+  flex: 0 0 280px;
+  max-width: 280px;
+}
+
+.stat-value-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+@media (max-width: 720px) {
+  .stat-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .stat-row > .stat-label {
+    flex: none;
+    max-width: none;
+  }
+}
+
+.section-title {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+  padding-left: 10px;
+  border-left: 3px solid #49c5ff;
+  line-height: 1.2;
+}
+
+.section-title.red {
+  border-left-color: #ff6b6b;
+}
+
+.section-title.green {
+  border-left-color: #64d67c;
+}
+
+.section-title.blue {
+  border-left-color: #49c5ff;
+}
+
+.master-cell {
+  min-width: 200px;
+}
+
+.muted {
+  color: #8a8a8a;
+}
+
+.pixel-preview {
+  position: fixed;
+  pointer-events: none;
+  z-index: 2000;
+  transform-origin: top left;
+  border: 1px solid #49c5ff;
+  border-radius: 6px;
+  background-color: #111;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- 集合首页 ---------- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-text strong {
+  font-size: 16px;
+  color: #f0f0f0;
+}
+
+.brand-text small {
+  font-size: 11px;
+  color: #8a8a8a;
+  letter-spacing: 0.04em;
+}
+
+.hero {
+  padding: 26px 0 8px;
+  border-bottom: 1px solid #2f2f2f;
+  margin-bottom: 26px;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  color: #8f8f8f;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.hero-badges .anticon {
+  color: #49c5ff;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  background: #262626;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+}
+
+.game-card:hover {
+  border-color: #49c5ff;
+  background: #2b2b2b;
+  transform: translateY(-2px);
+}
+
+.game-card-cover {
+  height: 132px;
+  background: radial-gradient(circle at 30% 20%, #2f3b44, #16181b 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.game-card-cover-icon {
+  font-size: 44px;
+  color: rgba(150, 220, 255, 0.85);
+  line-height: 1;
+}
+
+
+.game-card-cover img {
+  max-height: 84px;
+  max-width: 78%;
+  object-fit: contain;
+}
+
+.game-card-body {
+  padding: 14px 16px 16px;
+}
+
+.game-card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+.game-card-title .anticon {
+  color: #49c5ff;
+}
+
+.game-card-subtitle {
+  color: #8a8a8a;
+  font-size: 12px;
+  margin: 2px 0 8px;
+}
+
+.game-card-platforms {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.game-card-desc {
+  font-size: 13px;
+  margin-bottom: 10px !important;
+}
+
+.game-card-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.home-note {
+  background: #242424;
+}
+
+/* ---------- 游戏页 ---------- */
+
+.game-page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.game-page-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.game-page-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #2f2f2f;
+  font-size: 12px;
+  color: #8a8a8a;
+}
+
+.game-page-status a {
+  color: #6fb8dd;
+}
