@@ -4,7 +4,7 @@
  * 存档里每条记录都是「哈希 + 值」，游戏内部名字不写在文件里；
  * 这里用外部哈希表（hash;类型;名称）把已知记录翻译成可编辑字段。
  */
-import type { SaveFile } from './saveFile';
+import type { SaveFile } from '../../../core/saveFile';
 
 export const HASH_TYPE = {
   BOOL: 1,

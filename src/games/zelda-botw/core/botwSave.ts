@@ -32,7 +32,7 @@ import {
   VERSION,
   type HashName,
 } from './constants';
-import { SaveFile } from './saveFile';
+import { SaveFile } from '../../../core/saveFile';
 import { calculateScaleScore } from './score';
 
 export type ItemCategory = 'weapons' | 'bows' | 'shields' | 'clothes' | 'materials' | 'food' | 'other';

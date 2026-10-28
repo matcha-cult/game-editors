@@ -24,6 +24,7 @@ A pure front-end **collection of online game save editors**. Open it in a browse
 | --- | --- |
 | `/#/` | Editor collection home page (game cards) |
 | `/#/zelda-botw` | Breath of the Wild save editor |
+| `/#/zelda-totk` | Tears of the Kingdom save editor |
 | any other `/#/...` | 404 page with a button back home |
 
 Why hash routing: it works on GitHub Pages, object storage and any sub-path without server-side rewrite rules, and it also works when `index.html` is opened directly from disk.
@@ -33,6 +34,7 @@ Why hash routing: it works on GitHub Pages, object storage and any sub-path with
 | Game | Platforms | Main features |
 | --- | --- | --- |
 | The Legend of Zelda: Breath of the Wild | Wii U / Switch | rupees, hearts, stamina, items and modifiers, horses, coordinates, map pins, bulk Korok/enemy unlocks, compendium reset, raw hash-table advanced editor |
+| The Legend of Zelda: Tears of the Kingdom | Switch | rupees, max hearts, battery size, nine pouch categories (durability / modifiers / fused material / dyes / food effects), horses, coordinates, full hash-table advanced editor |
 
 > Adding a game: implement a page under `src/games/<id>/`, then add one entry to the `GAMES` array in `src/games/registry.tsx`; the home card and the route are generated automatically.
 
@@ -41,6 +43,10 @@ Why hash routing: it works on GitHub Pages, object storage and any sub-path with
 | Collection home | Breath of the Wild editor |
 | --- | --- |
 | ![Home](docs/screenshot-home.png) | ![Breath of the Wild](docs/screenshot-game.png) |
+
+| Tears of the Kingdom (status) | Tears of the Kingdom (weapons) |
+| --- | --- |
+| ![TotK status](docs/screenshot-totk.png) | ![TotK weapons](docs/screenshot-totk-weapons.png) |
 
 ## Getting started
 
@@ -88,6 +94,12 @@ game-editors/
     │   └── NotFoundPage.tsx    # 404
     ├── games/
     │   ├── registry.tsx        # game list: route, title, platforms, thumbnail, page component
+    │   ├── zelda-totk/         # Tears of the Kingdom editor
+    │   │   ├── ZeldaTotkPage.tsx  # game page (tabs + toolbar)
+    │   │   ├── core/           # struct engine (hash table / variables / arrays), save I/O, murmur3, labels
+    │   │   ├── data/           # field definitions, item limits, armor info, modifiers, zh locale
+    │   │   ├── state/          # React state for load / edit / download
+    │   │   └── components/     # status, pouch, horses, advanced editor, icons
     │   └── zelda-botw/
     │       ├── ZeldaBotwPage.tsx  # game page (toolbar + tabs)
     │       ├── core/           # binary I/O, version table, save logic, advanced editor, icons, score
@@ -101,6 +113,14 @@ game-editors/
 - Item names, modifiers, dyes, horse types, Korok and enemy hashes were mechanically converted from the existing editor data; no values were retyped by hand.
 - Icons come from 23 sheets of 16 columns × 64 px, cropped via `background-position`; armor uses the dyed entry in the same row.
 - The hash table (`public/assets/zelda-botw.hashes.csv`) is loaded on demand when the advanced editor tab is opened, so it stays out of the initial bundle.
+- Tears of the Kingdom field definitions, item limits, armor info, modifiers and zh locale were likewise mechanically converted; name hashing uses murmur3 (x86 32-bit) and was verified against known key values.
+- TotK item icons are loaded on demand from `public/assets/totk/item_icons/<category>/<item id>.png`; dyed armor icons live under `armors/dye/`.
+
+## Tears of the Kingdom port scope
+
+Included: save detection (v1.0 / v1.1.x-1.2.x / v1.4.x, plus modded saves), player status, nine pouch categories (durability / modifiers / fused material / dyes / food effects), horses, coordinates, and the raw hash-table advanced editor.
+
+Not included in this pass (the structure is ready for them): one-click completion unlocks (shrines / towers / Koroks / caves / bosses), bulk map pins with the coordinate database, EXP/level calculator, autobuild (schema) editor, save JSON import/export, paraglider fabric replacement.
 
 ## Disclaimer
 

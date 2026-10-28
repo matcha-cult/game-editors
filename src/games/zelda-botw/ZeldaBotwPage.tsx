@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { App as AntdApp, Alert, Button, Tag, Tabs, Typography } from 'antd';
 import { CloseOutlined, DownloadOutlined } from '@ant-design/icons';
-import { DropZone } from './components/DropZone';
+import { FileDropZone } from '../../components/FileDropZone';
 import { HomeTab } from './components/HomeTab';
 import { HorseTab } from './components/HorseTab';
 import { ItemTab } from './components/ItemTab';
@@ -103,7 +103,15 @@ export default function ZeldaBotwPage() {
       )}
 
       {!snapshot ? (
-        <DropZone loading={game.opening} onFile={game.open} />
+        <FileDropZone
+          loading={game.opening}
+          onFile={game.open}
+          title="拖入 game_data.sav，或点击选择文件"
+          hints="支持 Wii U 与 Switch 版本的旷野之息存档（v1.0 – v1.8/v1.9）"
+          accept=".sav,.bin,application/octet-stream"
+          sampleUrl="assets/game_data.sav"
+          sampleName="game_data.sav"
+        />
       ) : (
         <Tabs
           activeKey={activeKey}
